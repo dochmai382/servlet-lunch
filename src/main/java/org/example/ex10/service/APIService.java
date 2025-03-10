@@ -15,7 +15,6 @@ import java.util.Map;
 public class APIService {
     private static final APIService instance = new APIService();
     private final HttpClient httpClient = HttpClient.newHttpClient();
-    private final Dotenv dotenv = Dotenv.load();
     private final String groqToken;
     private final String togetherToken;
     private final String groqGuide;
@@ -26,6 +25,7 @@ public class APIService {
     }
 
     private APIService() {
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
         groqToken = dotenv.get("GROQ_KEY");
         togetherToken = dotenv.get("TOGETHER_KEY");
         groqGuide = dotenv.get("GROQ_GUIDE");
