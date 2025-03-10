@@ -27,13 +27,18 @@ public class APIController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        // ?prompt=점메추
+        // ?prompt=점메추&model=gpt
         String prompt = req.getParameter("prompt");
         String model = req.getParameter("model");
-        resp.setContentType("application/json");
+        resp.setContentType("application/json; application/json");
         resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
         APIParam apiParam = new APIParam(prompt, model);
-        out.println(apiService.callAPI(apiParam));
+        try {
+            out.println(apiService.callAPI(apiParam));
+        } catch (Exception e) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.println(e.getMessage());
+        }
     }
 }
