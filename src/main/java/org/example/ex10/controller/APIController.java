@@ -10,6 +10,7 @@ import org.example.ex10.model.APIParam;
 import org.example.ex10.service.APIService;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Logger;
 
 @WebServlet(name = "APIServlet", value = "/api")
@@ -25,14 +26,13 @@ public class APIController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         // ?prompt=점메추
         String prompt = req.getParameter("prompt");
         String model = req.getParameter("model");
-
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        ServletOutputStream out = resp.getOutputStream();
-
+        PrintWriter out = resp.getWriter();
         APIParam apiParam = new APIParam(prompt, model);
         out.println(apiService.callAPI(apiParam));
     }
