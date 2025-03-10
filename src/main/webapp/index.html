@@ -49,6 +49,7 @@
 <script>
     // 폼 요소 가져오기
     const controller = document.querySelector("#controller");
+    const submitButton = controller.querySelector("button"); // 제출 버튼 가져오기
 
     // 폼 제출 이벤트 리스너 추가
     controller.addEventListener("submit", async (event) => {
@@ -56,7 +57,7 @@
         event.preventDefault();
 
         // 폼 제출 중복 방지를 위해 폼 비활성화 (선택적)
-        controller.setAttribute("disabled", true);
+        submitButton.disabled = true;
 
         // 입력된 프롬프트와 모델 선택 값 가져오기
         const prompt = document.querySelector("#prompt").value;
@@ -86,8 +87,8 @@
             console.error("API 호출 중 오류 발생:", error);
             document.querySelector("#response").textContent = "오류가 발생했습니다. 다시 시도해주세요.";
         } finally {
-            // 폼 활성화 (성공 또는 실패 후 항상 실행)
-            controller.removeAttribute("disabled");
+            // 제출 버튼 활성화
+            submitButton.disabled = false;
         }
     });
 </script>
