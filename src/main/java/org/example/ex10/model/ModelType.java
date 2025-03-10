@@ -5,8 +5,8 @@ public enum ModelType {
     TOGETHER_LLAMA("meta-llama/Llama-3.3-70B-Instruct-Turbo", ModelPlatform.TOGETHER)
     ;
 
-    final String name;
-    final ModelPlatform platform;
+    public final String name;
+    public final ModelPlatform platform;
 
     ModelType(String name, ModelPlatform platform) {
         this.name = name;
