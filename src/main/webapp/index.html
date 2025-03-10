@@ -21,4 +21,14 @@
     </form>
 </div>
 </body>
+<script>
+    const controller = document.querySelector("#controller")
+    controller.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        // alert("폼폼");
+        const prompt = document.querySelector("#prompt").value;
+        const model = document.querySelector("#model").value;
+        alert(`${prompt} ${model}`);
+    })
+</script>
 </html>
