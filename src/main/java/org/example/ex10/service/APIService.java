@@ -1,5 +1,7 @@
 package org.example.ex10.service;
 
+import org.example.ex10.model.APIParam;
+
 public class APIService {
     private static final APIService instance = new APIService();
 
@@ -9,7 +11,7 @@ public class APIService {
 
     private APIService() {}
 
-    public String callAPI() {
-        return "Hello World";
+    public String callAPI(APIParam apiParam) {
+        return "%s %s".formatted(apiParam.prompt(), apiParam.model());
     }
 }
